@@ -1,0 +1,10 @@
+.isi-data{
+    height: 150px;
+    text-align: center;
+}
+.isi-data th,td{
+    vertical-align: middle;
+}
+.button-place{
+    text-align: center;
+}
