@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    protected $fillable = [''];
+    protected $primaryKey = 'invoice_id';
+    protected $fillable = ['invoice_num','product_id','qty','address','zipcode'];
     public function Product(){
         return $this->hasMany(Product::class);
     }

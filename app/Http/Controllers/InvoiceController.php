@@ -10,42 +10,37 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    
-    public function create(Request $request)
+    public function invoiceForm($id){
+        $product = Product::findOrFail($id);
+        return view("layouts.invoiceForm",compact('product'));
+    }
+    public function create(Request $request, $id)
     {
         $validate = $request->validate([
-            'category'=>['required','string'],
-            'name' => ['required','min:5','max:80','string'],
-            'price' => ['required','integer'],
-            'qty' => ['required','integer'],
+            'qty'=>['required','integer'],
+            'address' => ['required','min:10','max:100','string'],
+            'zipcode' => ['required','integer','digits_between:5,5','numeric'],
         ],[
-            'category.required' => 'the category must required',
-            'name.required' => 'the product name must required',
-            'name.min' => 'the product name must be 5-80 characters',
-            'name.max' => 'the product name must be 5-80 characters',
-            'price.required' => 'the product price must required',
-            'price.integer' => 'the product price must integer',
-            'qty.required' => 'the product quantity must required',
-            'qty.integer' => 'the product quantity must integer',
+            'qty.required' => 'Kuantitas must required',
+            'qty.integer' => 'Kuantitas must integer',
+            'address.required' => 'Alamat must required',
+            'address.min' => 'Alamat must be 10-100 characters',
+            'address.max' => 'Alamat must be 10-100 characters',
+            'zipcode.required' => 'Kode Pos must be 10-100 characters',
+            'zipcode.integer'=> 'zipcode must integer',
+            'zipcode.digits_between' => 'zipcode must 5 digits',
         ]);
         if($validate){
-            
-            if($request->hasFile('picture')){
-                $productname = $request->file('picture')->getClientOriginalName();
-                $picture = $request->file('picture')->storeAs('public/productImages',$productname);
-            }else{
-                $productname = "No Picture";
-            }
-
-        Product::create([
-                'category'=>$request->category,
-                'name'=>$request->name,
-                'price'=>$request->price,
+            $product = Product::findOrFail($id);
+            Invoice::create([
+                'invoice_num'=> "INV-XXX",
+                'product_id' => $product->product_id,
                 'qty'=>$request->qty,
-                'picture'=>$productname,
+                'address'=>$request->address,
+                'zipcode' => $request->zipcode,
             ]);
         }
-        return view('layouts.adminHome');
+        return redirect()->route('userInvoice');
     }
 
     

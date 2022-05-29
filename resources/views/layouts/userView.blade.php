@@ -10,6 +10,7 @@
             <th scope="col">Product Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Picture</th>
+         
           </tr>
         </thead> 
         <tbody>
@@ -32,10 +33,18 @@
               @endif
             </div>
           </td>
+          <td class="data">
+            <form action="{{ route('InvoiceForm',$product->product_id) }}" method="post">
+              @csrf
+              <button class="btn btn-primary btn-lg active">Add Invoices</button>
+            </form>
+          </td>
         </tr>
+
        @endforeach
         @endif
         
+
       </tbody>
       </table>
 </div>

@@ -24,4 +24,5 @@ class UserController extends Controller
         $invoices = Invoice::all();
         return view('layouts.userInvoice',compact("invoices"));
     }
+    
 }
