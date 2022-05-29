@@ -16,10 +16,11 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('invoice_num')->default(rand(0,10));
             $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('product_id')->on('category');
+            $table->foreign('product_id')->references('product_id')->on('products');
             $table->string('address');
-            $table->string('zipcode');
+            $table->string('zipcode');  
         });
     }
 

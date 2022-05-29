@@ -36,6 +36,7 @@ Route::group(['middleware'=>(['adminOnly','auth'])],function(){
 Route::group(['middleware'=>(['userOnly','auth'])],function(){
     Route::get('user/home/',[UserController::class,"userHome"])->name("userHome");
     Route::get('user/viewProduct/',[UserController::class,"userViewProduct"])->name("userViewProduct");
+    Route::get('user/Invoice/',[UserController::class,"userInvoice"])->name("userInvoice");
 });
 require __DIR__.'/auth.php';
 
