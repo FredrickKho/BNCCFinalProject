@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -21,7 +22,10 @@ class UserController extends Controller
         return view('layouts.userView',compact("products"));
     }
     function userInvoice(){
-        $invoices = Invoice::all();
+        $invoices = DB::table('invoice_products')
+        ->join('products','invoice_products.product_id','=','products.product_id')
+        ->join('invoices','invoice_products.invoice_id','=','invoices.invoice_id')
+        ->get();
         return view('layouts.userInvoice',compact("invoices"));
     }
     

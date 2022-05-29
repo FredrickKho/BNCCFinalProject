@@ -34,10 +34,7 @@
             </div>
           </td>
           <td class="data">
-            <form action="{{ route('InvoiceForm',$product->product_id) }}" method="post">
-              @csrf
-              <button class="btn btn-primary btn-lg active">Add Invoices</button>
-            </form>
+            <a class="btn btn-primary btn-lg active" href="{{ route('InvoiceForm',$product->product_id) }}">ADD INVOICE</a>
           </td>
         </tr>
 

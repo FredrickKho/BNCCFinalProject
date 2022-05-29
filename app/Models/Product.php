@@ -13,4 +13,7 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(category::class);
     }
+    public function invoice(){
+        return $this->belongsToMany(Invoice::class);
+    }
 }
