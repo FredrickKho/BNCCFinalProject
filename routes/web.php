@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Product;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use GuzzleHttp\Middleware;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,17 +22,20 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('/');
+Route::group(['middleware'=>(['adminOnly','auth'])],function(){
+    Route::get('/admin/home/', [AdminController::class,"adminHome"])->name("adminHome");
+    Route::get('/admin/create/', [AdminController::class,"adminCreate"])->name("adminCreate");
+    Route::get('/admin/view/', [AdminController::class,"adminView"])->name("adminView");
+    Route::get('/admin/update/{id}',[AdminController::class,"adminUpdatePage"])->name('adminUpdatePage');
+    Route::post('/product/add',[ProductController::class,"create"])->name('create');
+    Route::delete('/product/delete/{id}',[ProductController::class,"destroy"])->name("delete");
+    Route::patch('/adminUpdate/{id}',[ProductController::class,"update"])->name('update');
 });
 
-Route::get('/admin/home/', [AdminController::class,"adminHome"])->middleware(['auth'])->name("adminHome");
-Route::get('/admin/create/', [AdminController::class,"adminCreate"])->middleware(['auth'])->name("adminCreate");
-Route::get('/admin/view/', [AdminController::class,"adminView"])->middleware(['auth'])->name("adminView");
-Route::get('/admin/update/{id}',[AdminController::class,"adminUpdatePage"])->middleware(['auth'])->name('adminUpdatePage');
-Route::post('/product/add',[ProductController::class,"create"])->middleware(['auth'])->name('create');
-Route::delete('/product/delete/{id}',[ProductController::class,"destroy"])->middleware(['auth'])->name("delete");
-Route::patch('/adminUpdate/{id}',[ProductController::class,"update"])->middleware(['auth'])->name('update');
-
-Route::get('user/home/',[UserController::class,"userHome"])->middleware(['auth'])->name("userHome");
-
+Route::group(['middleware'=>(['userOnly','auth'])],function(){
+    Route::get('user/home/',[UserController::class,"userHome"])->name("userHome");
+    Route::get('user/viewProduct/',[UserController::class,"userViewProduct"])->name("userViewProduct");
+});
 require __DIR__.'/auth.php';
 

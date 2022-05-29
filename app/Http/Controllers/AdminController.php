@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('adminOnly');
+    }
     function adminHome(){
         return view("layouts.adminHome");
     }

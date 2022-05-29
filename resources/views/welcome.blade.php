@@ -20,8 +20,12 @@
                         <ul class="navbar-nav mr-auto option">
                             @if (Route::has('login'))
                                 @auth
-                                    <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
-                                @else
+                                    @if (auth()->user()->Admin_ID != null)
+                                        <a href="{{ route('adminHome') }}" class="nav-link">Dashboard</a>
+                                    @else
+                                        <a href="{{ route('userHome') }}" class="nav-link">Dashboard</a>
+                                    @endif
+                            @else
                                     <a href="{{ route('login') }}" class="nav-link">Log in</a>
             
                                     @if (Route::has('register'))
@@ -42,7 +46,18 @@
                     <h2>Product Store</h2>
                 </div>
                 <div class="create-link">
-                    <a href="/login">Login</a>
+                    @if (Route::has('login'))
+                        @auth
+                        @if (auth()->user()->Admin_ID != null)
+                            <a href="{{ route('adminHome') }}" class="nav-link">Go to dashboard</a>
+                        @else
+                            <a href="{{ route('userHome') }}" class="nav-link">Go to dashboard</a>
+                    @endif
+
+                        @endauth
+                    @else
+                        <a href="/login">Login</a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
-@extends('userPage');
+@extends('userPage')
 @section("home")
 <div class="introduction">
     <div class="intro">
         <div class="intro-text">
-            <h1>Welcome </h1>
-            <h2>User</h2>
+            <h1>Welcome {{ $user->name }} </h1>
+            <h2></h2>
         </div>
         <form method="POST" action="{{ route('logout') }}" class="form-logout">
           @csrf
