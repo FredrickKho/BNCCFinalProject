@@ -26,6 +26,8 @@ class UserController extends Controller
         ->join('products','invoice_products.product_id','=','products.product_id')
         ->join('invoices','invoice_products.invoice_id','=','invoices.invoice_id')
         ->get();
+        // $invoices = Invoice::join('products','products.product_id','invoices.product_id')
+        //             ->get();
         return view('layouts.userInvoice',compact("invoices"));
     }
     

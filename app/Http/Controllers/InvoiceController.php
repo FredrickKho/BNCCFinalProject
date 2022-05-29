@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
+use App\Models\InvoiceProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -39,8 +40,13 @@ class InvoiceController extends Controller
                 'address'=>$request->address,
                 'zipcode' => $request->zipcode,
             ]);
+            // $invoice = Invoice::findOrFail($request->invoice_id);
+            // InvoiceProduct::create([
+            //     'invoice_id' => $invoice->invoice_id,
+            //     'product_id' => $product->product_id,
+            // ]);
+            return redirect()->route('userInvoice');
         }
-        return redirect()->route('userInvoice');
     }
 
     
