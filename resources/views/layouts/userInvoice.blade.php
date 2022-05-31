@@ -14,7 +14,8 @@
             <th scope="col">Alamat Pengiriman</th>
             <th scope="col">Kode Zip</th>
             <th scope="col">Kuantitas</th>
-            <th scope="col">Total Price</th
+            <th scope="col">Total Price</th>
+            {{-- <th scope="col"></th> --}}
           </tr>
         </thead> 
         <tbody>
@@ -27,13 +28,20 @@
               <td><div class="data">{{ $invoice->zipcode }}</div></td>
               <td><div class="data">{{ $invoice->quantity }}</div></td>
               <td><div class="data">{{ $invoice->quantity * $invoice->price }}</div></td>
+              <td>
+                <form action="{{ route('deleteInvoice',$invoice->invoice_id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">DELETE INVOICE</button>
+                </form>
+              </td>
               <?php $totalPrice = $totalPrice + ($invoice->quantity * $invoice->price) ?>
             </tr>
         @endforeach
       </tbody>
       </table>
+      <h1>TOTAL PRICE = {{ $totalPrice }}</h1>
     @endif
-    <h1>TOTAL PRICE = {{ $totalPrice }}</h1>
     <a class="btn btn-primary btn-lg active" href="{{ route('userViewProduct') }}">Add Invoices</a>
     
 </div>

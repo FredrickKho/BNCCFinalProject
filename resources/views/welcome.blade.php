@@ -52,11 +52,12 @@
                             <a href="{{ route('adminHome') }}" class="nav-link">Go to dashboard</a>
                         @else
                             <a href="{{ route('userHome') }}" class="nav-link">Go to dashboard</a>
-                    @endif
-
-                        @endauth
+                        @endif
+                        
                     @else
+                        
                         <a href="/login">Login</a>
+                        @endauth
                     @endif
                 </div>
             </div>

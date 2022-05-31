@@ -40,6 +40,7 @@ Route::group(['middleware'=>(['userOnly','auth'])],function(){
     Route::get('user/Invoice/',[UserController::class,"userInvoice"])->name("userInvoice");
     Route::get('user/Invoice/Form/{id}',[InvoiceController::class,"invoiceForm"])->name('InvoiceForm');
     Route::post('user/Invoice/Form/add/{id}',[InvoiceController::class,"create"])->name('createInvoice');
+    Route::delete('user/Invoice/delete/{id}',[InvoiceController::class,"destroy"])->name("deleteInvoice");
 });
 require __DIR__.'/auth.php';
 

@@ -5,12 +5,15 @@
 }
 
 .create-form{
-    margin-top:50px;
+    
+    border: 2px grey solid;
+    margin: 40px 300px;
 }
 .form-group{
     margin-top:20px;
     margin-left: 20%;
     margin-right: 20%;
+    
 }
 .form-group input{
     margin-top:20px;
@@ -19,4 +22,11 @@
 .rupiah{
     margin-top: 20px;
     font-size: 30px;
+}
+.form-group.price{
+    margin: 20px auto;
+}
+.harga-barang {
+    display: flex;
+   margin:0 150px;
 }

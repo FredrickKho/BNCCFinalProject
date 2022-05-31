@@ -45,7 +45,7 @@ class ProductController extends Controller
                 'picture'=>$productname,
             ]);
         }
-        return view('layouts.adminHome');
+        return view('layouts.AdminSuccessCreate');
     }
    
     public function update($id,Request $request, Product $product)
@@ -84,7 +84,7 @@ class ProductController extends Controller
                 'picture'=>$productname,
             ]);
         }
-        return redirect()->route('adminView');
+        return view('layouts.AdminSuccessUpdate');
     }
 
     public function destroy($id)

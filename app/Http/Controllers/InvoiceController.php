@@ -47,7 +47,7 @@ class InvoiceController extends Controller
                 'invoice_id' => $invoice->invoice_id,
                 'product_id' => $product->product_id,
             ]);
-            return redirect()->route('userInvoice');
+            return view('layouts.UserSuccessCreateInvoice');
         }
     }
 
@@ -71,12 +71,14 @@ class InvoiceController extends Controller
     
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
-        //
+        
     }
 
    
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
         
+        Invoice::destroy($id);
+        return redirect()->route('userInvoice');
     }
 }

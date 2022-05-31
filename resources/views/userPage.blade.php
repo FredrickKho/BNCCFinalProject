@@ -36,6 +36,7 @@
     @yield("viewProduct")
     @yield("Invoice")
     @yield('invoiceForm')
+    @yield('SuccessCreate')
     <div class="footer">
       <div class="copyright">
           <i class="fa fa-copyright" aria-hidden="true">Copyright By Fredrick Kho (Backend Developer)</i>

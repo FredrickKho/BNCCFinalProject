@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     {
         DB::table('products')->insert([
             'product_id' => '001',
-            'category' => 'Sayur',
+            'category' => 'Sayur-sayuran',
             'name' => 'Brokoli',
             'price' => 60000,
             'qty' => 10, 
@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'product_id' => '002',
-            'category' => 'buah',
+            'category' => 'Buah-buahan',
             'name' => 'apple',
             'price' => 20000,
             'qty' => 16, 
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'product_id' => '003',
-            'category' => 'alat',
+            'category' => 'Garasi',
             'name' => 'gergaji',
             'price' => 120000,
             'qty' => 4,  
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'product_id' => '004',
-            'category' => 'buku',
+            'category' => 'Other',
             'name' => 'KBBI',
             'price' => 55000,
             'qty' => 7,  
