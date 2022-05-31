@@ -4,6 +4,7 @@
     @if ($invoices->isEmpty())
         <h1>You have no invoice</h1>
     @else
+    <?php $totalPrice = 0 ?>
     <table class="table table-striped">
         <thead>
           <tr class="judul-kolom" style="text-align: center">
@@ -13,23 +14,26 @@
             <th scope="col">Alamat Pengiriman</th>
             <th scope="col">Kode Zip</th>
             <th scope="col">Kuantitas</th>
-
+            <th scope="col">Total Price</th
           </tr>
         </thead> 
         <tbody>
         @foreach ($invoices as $invoice)
             <tr class="isi-data">
-              <td><div class="data"></div></td>
-              <td><div class="data"></div></td>
-              <td><div class="data"></div></td>
-              <td><div class="data"></div></td>
-              <td><div class="data"></div></td>
-              <td><div class="data"></div></td>
+              <td><div class="data">{{ $invoice->category }}</div></td>
+              <td><div class="data">{{ $invoice->name }}</div></td>
+              <td><div class="data">{{ $invoice->price }}</div></td>
+              <td><div class="data">{{ $invoice->address }}</div></td>
+              <td><div class="data">{{ $invoice->zipcode }}</div></td>
+              <td><div class="data">{{ $invoice->quantity }}</div></td>
+              <td><div class="data">{{ $invoice->quantity * $invoice->price }}</div></td>
+              <?php $totalPrice = $totalPrice + ($invoice->quantity * $invoice->price) ?>
             </tr>
         @endforeach
       </tbody>
       </table>
     @endif
+    <h1>TOTAL PRICE = {{ $totalPrice }}</h1>
     <a class="btn btn-primary btn-lg active" href="{{ route('userViewProduct') }}">Add Invoices</a>
     
 </div>

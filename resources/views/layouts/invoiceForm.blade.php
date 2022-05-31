@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label>Kuantitas : (Stock tersedia sebanyak {{ $product->qty }})</label>
-            <input type="text" name="qty">
+            <input type="text" name="quantity">
         </div>
         <div class="form-group">
             <label>Harga perbarang : Rp{{ $product->price }}</label>

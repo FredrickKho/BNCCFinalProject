@@ -19,7 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('invoice_num');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('product_id')->on('products');
-            $table->integer('qty');
+            $table->integer('quantity');
             $table->string('address');
             $table->string('zipcode');  
         });

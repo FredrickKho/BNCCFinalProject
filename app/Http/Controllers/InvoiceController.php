@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\InvoiceProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -16,14 +17,15 @@ class InvoiceController extends Controller
         return view("layouts.invoiceForm",compact('product'));
     }
     public function create(Request $request, $id)
-    {
+    {   $product = Product::findOrFail($id);
         $validate = $request->validate([
-            'qty'=>['required','integer'],
+            'quantity'=>['required','integer','min:0','max:'.$product->qty],
             'address' => ['required','min:10','max:100','string'],
             'zipcode' => ['required','integer','digits_between:5,5','numeric'],
         ],[
-            'qty.required' => 'Kuantitas must required',
-            'qty.integer' => 'Kuantitas must integer',
+            'quantity.required' => 'Kuantitas must required',
+            'quantity.integer' => 'Kuantitas must integer',
+            'quantity.max' => 'Kuantitas must less than '.$product->qty,
             'address.required' => 'Alamat must required',
             'address.min' => 'Alamat must be 10-100 characters',
             'address.max' => 'Alamat must be 10-100 characters',
@@ -32,19 +34,19 @@ class InvoiceController extends Controller
             'zipcode.digits_between' => 'zipcode must 5 digits',
         ]);
         if($validate){
-            $product = Product::findOrFail($id);
+            
             Invoice::create([
                 'invoice_num'=> "INV-XXX",
                 'product_id' => $product->product_id,
-                'qty'=>$request->qty,
+                'quantity'=>$request->quantity,
                 'address'=>$request->address,
                 'zipcode' => $request->zipcode,
             ]);
-            // $invoice = Invoice::findOrFail($request->invoice_id);
-            // InvoiceProduct::create([
-            //     'invoice_id' => $invoice->invoice_id,
-            //     'product_id' => $product->product_id,
-            // ]);
+            $invoice = DB::table('invoices')->orderBy('invoice_id','desc')->first();
+            InvoiceProduct::create([
+                'invoice_id' => $invoice->invoice_id,
+                'product_id' => $product->product_id,
+            ]);
             return redirect()->route('userInvoice');
         }
     }
