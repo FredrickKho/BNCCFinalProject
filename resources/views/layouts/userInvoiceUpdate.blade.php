@@ -1,8 +1,7 @@
 @extends('userPage')
-@section('invoiceForm')
-@php $invoiceNumber = "INV".rand(1,9).rand(0,9).rand(0,9).rand(0,9) @endphp
+@section('updateInvoice')
 <div class="create-section">
-    <h1 class="create">Create Invoice</h1>
+    <h1 class="create">Update Invoice</h1>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -12,11 +11,21 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('createInvoice',$invoiceNumber) }}" class="create-form" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('updateInvoice',$product->product_id) }}" class="create-form" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('POST')
+        @method('PATCH')
         <div class="form-group">
-            <h2>Invoice Number : <p style="display:inline"value= "{{ $invoiceNumber }}" name="invoiceNumber">{{ $invoiceNumber }}</p></h2>
+            <label>Kategori : {{ $product->category }}</label>
+        </div>
+        <div class="form-group">
+            <label>Nama Barang : {{ $product->name }}</label>
+        </div>
+        <div class="form-group">
+            <label>Kuantitas : (Stock tersedia sebanyak {{ $product->qty }})</label>
+            <input type="text" name="quantity">
+        </div>
+        <div class="form-group">
+            <label>Harga perbarang : Rp{{ $product->price }}</label>
         </div>
         <div class="form-group">
             <label>Alamat Pengiriman : </label>

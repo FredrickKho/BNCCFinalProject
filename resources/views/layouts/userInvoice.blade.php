@@ -4,45 +4,28 @@
     @if ($invoices->isEmpty())
         <h1>You have no invoice</h1>
     @else
-    <?php $totalPrice = 0 ?>
     <table class="table table-striped">
         <thead>
           <tr class="judul-kolom" style="text-align: center">
-            <th scope="col">Category</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Product Price</th>
-            <th scope="col">Alamat Pengiriman</th>
-            <th scope="col">Kode Zip</th>
-            <th scope="col">Kuantitas</th>
-            <th scope="col">Total Price</th>
+            <th scope="col">Invoice Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Zipcode</th>
             {{-- <th scope="col"></th> --}}
           </tr>
         </thead> 
         <tbody>
         @foreach ($invoices as $invoice)
-            <tr class="isi-data">
-              <td><div class="data">{{ $invoice->category }}</div></td>
-              <td><div class="data">{{ $invoice->name }}</div></td>
-              <td><div class="data">{{ $invoice->price }}</div></td>
-              <td><div class="data">{{ $invoice->address }}</div></td>
-              <td><div class="data">{{ $invoice->zipcode }}</div></td>
-              <td><div class="data">{{ $invoice->quantity }}</div></td>
-              <td><div class="data">{{ $invoice->quantity * $invoice->price }}</div></td>
-              <td>
-                <form action="{{ route('deleteInvoice',$invoice->invoice_id) }}" method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-danger">DELETE INVOICE</button>
-                </form>
-              </td>
-              <?php $totalPrice = $totalPrice + ($invoice->quantity * $invoice->price) ?>
-            </tr>
+        <tr class="isi-data">
+          <th scope="row"><div class="data">{{ $invoice->invoiceNumber }}</div></th>
+          <td><div class="data">{{ $invoice->address }}</div></td>
+          <td><div class="data">{{ $invoice->zipcode }}</div></td>
+          <td style="width:250px"><a  href="{{ route('invoiceProduct',$invoice->invoice_products_id) }}" style="width:125px;" class="btn btn-success">Show all product in this invoice</a></td>
+        </tr>
         @endforeach
       </tbody>
       </table>
-      <h1>TOTAL PRICE = {{ $totalPrice }}</h1>
     @endif
-    <a class="btn btn-primary btn-lg active" href="{{ route('userViewProduct') }}">Add Invoices</a>
+    <a class="btn btn-primary btn-lg active" href="{{ route('InvoiceForm') }}">Create Invoice</a>
     
 </div>
 @endsection

@@ -11,9 +11,10 @@ class Product extends Model
     protected $primaryKey = 'product_id';
     protected $fillable = ['category','name','price','qty','picture'];
     public function category(){
-        return $this->belongsTo(category::class);
+        return $this->hasOne(category::class);
     }
-    public function invoice(){
+    public function Invoice(){
         return $this->belongsToMany(Invoice::class);
     }
+    
 }

@@ -36,7 +36,11 @@
     @yield("viewProduct")
     @yield("Invoice")
     @yield('invoiceForm')
+    @yield('invoiceProductList')
+    @yield('updateInvoice')
+    @yield('ProductToInvoiceForm')
     @yield('SuccessCreate')
+    @yield('SuccessUpdate')
     <div class="footer">
       <div class="copyright">
           <i class="fa fa-copyright" aria-hidden="true">Copyright By Fredrick Kho (Backend Developer)</i>

@@ -7,25 +7,26 @@ use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\InvoiceProduct;
 use App\Models\Product;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
-    public function invoiceForm($id){
-        $product = Product::findOrFail($id);
-        return view("layouts.invoiceForm",compact('product'));
+    public function InvoiceForm(){
+        return view('layouts.invoiceForm');
     }
-    public function create(Request $request, $id)
-    {   $product = Product::findOrFail($id);
+    public function ProductToInvoiceForm($invoiceid,$productid){
+        $product = Product::findOrFail($productid);
+        $invoice = InvoiceProduct::findOrFail($invoiceid);
+        return view("layouts.userProductToInvoiceForm",compact("product","invoice"));
+    }
+    public function create(Request $request, $invoiceNumber)
+    {  
         $validate = $request->validate([
-            'quantity'=>['required','integer','min:0','max:'.$product->qty],
             'address' => ['required','min:10','max:100','string'],
             'zipcode' => ['required','integer','digits_between:5,5','numeric'],
         ],[
-            'quantity.required' => 'Kuantitas must required',
-            'quantity.integer' => 'Kuantitas must integer',
-            'quantity.max' => 'Kuantitas must less than '.$product->qty,
             'address.required' => 'Alamat must required',
             'address.min' => 'Alamat must be 10-100 characters',
             'address.max' => 'Alamat must be 10-100 characters',
@@ -35,23 +36,33 @@ class InvoiceController extends Controller
         ]);
         if($validate){
             
-            Invoice::create([
-                'invoice_num'=> "INV-XXX",
-                'product_id' => $product->product_id,
-                'quantity'=>$request->quantity,
+            InvoiceProduct::create([
+                'invoiceNumber'=> $invoiceNumber,
                 'address'=>$request->address,
                 'zipcode' => $request->zipcode,
-            ]);
-            $invoice = DB::table('invoices')->orderBy('invoice_id','desc')->first();
-            InvoiceProduct::create([
-                'invoice_id' => $invoice->invoice_id,
-                'product_id' => $product->product_id,
             ]);
             return view('layouts.UserSuccessCreateInvoice');
         }
     }
 
-    
+    public function addProductToInvoice(Request $request,$invoiceid,$productid){
+        $product = Product::findOrFail($productid);
+        $invoice = InvoiceProduct::findOrFail($invoiceid);
+        $validate = $request->validate([
+            'quantity' => ['required','numeric','min:1','max:'.$product->qty],
+        ],[
+            'quantity.required' => 'Quantity must required',
+            'quantity.max' => 'Quantity must not more than'.$product->qty,
+        ]);
+        if($validate){
+            Invoice::create([
+                'product_id' => $product->product_id,
+                'invoiceproduct_id' => $invoice->invoice_products_id,
+                'quantity' => $request->quantity,
+            ]);
+            return redirect()->route('userHome');
+        }
+    }
     public function store(StoreInvoiceRequest $request)
     {
         

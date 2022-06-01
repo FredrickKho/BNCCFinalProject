@@ -33,6 +33,9 @@
               @endif
             </div>
           </td>
+          <td class="data">
+            <a class="btn btn-primary btn-lg active" href="{{ route('ProductToInvoiceForm',[$invoices->invoice_products_id,$product->product_id]) }}">ADD PRODUCT TO INVOICE</a>
+          </td>
         </tr>
 
        @endforeach

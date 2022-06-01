@@ -34,6 +34,7 @@
     @yield("home")
     @yield("create")
     @yield('view')
+    @yield('viewProduct')
     @yield("UpdatePage")
     @yield('SuccessCreate')
     @yield('SuccessUpdate')

@@ -38,9 +38,15 @@ Route::group(['middleware'=>(['userOnly','auth'])],function(){
     Route::get('user/home/',[UserController::class,"userHome"])->name("userHome");
     Route::get('user/viewProduct/',[UserController::class,"userViewProduct"])->name("userViewProduct");
     Route::get('user/Invoice/',[UserController::class,"userInvoice"])->name("userInvoice");
-    Route::get('user/Invoice/Form/{id}',[InvoiceController::class,"invoiceForm"])->name('InvoiceForm');
-    Route::post('user/Invoice/Form/add/{id}',[InvoiceController::class,"create"])->name('createInvoice');
+    Route::get('user/Invoice/Form/',[InvoiceController::class,"invoiceForm"])->name('InvoiceForm');
+    Route::get('user/Invoice/{invoiceid}/addProduct/{productid}/',[InvoiceController::class,"ProductToInvoiceForm"])->name('ProductToInvoiceForm');
+    Route::post('user/Invoice/Form/add/{invoiceNumber?}',[InvoiceController::class,"create"])->name('createInvoice');
+    Route::post('user/Invoice/addProduct/{invoiceid}/{productid}',[InvoiceController::class,"addProductToInvoice"])->name('addProductToInvoice');
+    Route::get('user/Invoice/{id}',[UserController::class,"invoiceProductList"])->name('invoiceProduct');
+    Route::get('user/Invoice/{id}/addProduct',[UserController::class,"addProductToInvoice"])->name("productToInvoice");
     Route::delete('user/Invoice/delete/{id}',[InvoiceController::class,"destroy"])->name("deleteInvoice");
+
 });
+
 require __DIR__.'/auth.php';
 
