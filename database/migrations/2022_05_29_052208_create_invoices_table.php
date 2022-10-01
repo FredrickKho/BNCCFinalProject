@@ -19,7 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('productname');
             $table->string('category');
             $table->integer('price');
-            $table->foreign('invoiceproduct_id')->references('invoice_products_id')->on('invoice_products');
+            $table->foreign('invoiceproduct_id')->references('invoice_products_id')->on('invoice_products')->onDelete('cascade');
             $table->integer('quantity');
             
         });

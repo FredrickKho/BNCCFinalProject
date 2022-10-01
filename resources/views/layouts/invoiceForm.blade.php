@@ -20,13 +20,15 @@
         </div>
         <div class="form-group">
             <label>Alamat Pengiriman : </label>
-            <input type="text" name="address"  placeholder="Masukan Alamat Pengiriman">
+            <input class="input-box" type="text" name="address"  placeholder="Masukan Alamat Pengiriman" autocomplete="off">
         </div>
         <div class="form-group">
             <label>Kode Pos : </label>
-            <input type="text" name="zipcode"  placeholder="Masukan Kode Pos">
+            <input class="input-box" type="text" name="zipcode"  placeholder="Masukan Kode Pos" autocomplete="off">
           </div>
-        <button type="submit" class="btn btn-primary">Create Invoice</button>
+        <div class="submit">
+            <button type="submit" class="btn btn-primary">Create Invoice</button>
+        </div>
     </form>
 </div>
 @endsection

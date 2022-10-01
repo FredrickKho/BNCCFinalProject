@@ -1,7 +1,7 @@
 @extends('userPage')
 @section("invoiceProductList")
 @php $totalPrice = 0 @endphp
-<div class="content">
+<div class="content" style="height:700px">
     <div class="header-content" style="text-align: center">
         <h6>PT WEASELSTORE</h6>
         <h6>Invoice Number : {{ $invoices->invoiceNumber }}</h6>
@@ -49,9 +49,7 @@
                 </tr>
                 <td colspan="5" style="text-align: right;"><h1>TOTAL PRICE = Rp{{ $totalPrice }}</h1></td>
             @endif
-            
         </tbody>
-        
     </table>
     </div>
 </div>

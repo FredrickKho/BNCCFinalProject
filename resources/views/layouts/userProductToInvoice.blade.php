@@ -27,15 +27,26 @@
           <td>
             <div class="data">
               @if ($product->picture == "No Picture")
-                <p>No Picture</p>
+                <h6 class="data">No Picture</h6>
               @else
                 <img src="{{ asset('storage/productImages/' . $product->picture) }}" style="width: 100px; height:100px" >
               @endif
             </div>
           </td>
+          @if ($product->qty ==0)
+            <td class="data">
+              <h6>
+                Barang sudah habis
+              </h6>
+              <h6>
+                silahkan tunggu hingga barang di-restock ulang
+              </h6>
+            </td>
+          @else
           <td class="data">
             <a class="btn btn-primary btn-lg active" href="{{ route('ProductToInvoiceForm',[$invoices->invoice_products_id,$product->product_id]) }}">ADD PRODUCT TO INVOICE</a>
           </td>
+          @endif
         </tr>
 
        @endforeach

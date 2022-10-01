@@ -1,3 +1,10 @@
+.Invoice{
+    height: 650px;
+}
+.noInvoice{
+    margin-top: 100px;
+    text-align: center;
+}
 .create-section{
     text-align: center;
     margin-top:30px;
@@ -19,4 +26,8 @@
 .rupiah{
     margin-top: 20px;
     font-size: 30px;
+}
+.createInvoice{
+    margin-top: 50px;
+    text-align: center;
 }

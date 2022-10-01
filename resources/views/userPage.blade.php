@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="{{ URL::asset("css/userPage.css") }}">
         <link rel="stylesheet" href="{{ URL::asset("css/userViewProduct.css") }}">
         <link rel="stylesheet" href="{{ URL::asset('css/userInvoice.css') }}">
-
+        <link rel="stylesheet" href="{{ URL::asset('css/invoiceForm.css') }}">
     </head>
     <body>
       <div class="header">

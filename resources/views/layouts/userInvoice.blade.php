@@ -2,7 +2,10 @@
 @section('Invoice')
 <div class="Invoice">
     @if ($invoices->isEmpty())
+      <div class="noInvoice">
         <h1>You have no invoice</h1>
+        <h3>Click "Create Invoice" to get your first invoice</h3>
+      </div>
     @else
     <table class="table table-striped">
         <thead>
@@ -19,7 +22,7 @@
           <th scope="row"><div class="data">{{ $invoice->invoiceNumber }}</div></th>
           <td><div class="data">{{ $invoice->address }}</div></td>
           <td><div class="data">{{ $invoice->zipcode }}</div></td>
-          <td style="width:250px"><a  href="{{ route('invoiceProduct',$invoice->invoice_products_id) }}" style="width:125px;" class="btn btn-success">Show all product in this invoice</a></td>
+          <td style="width:250px"><a  href="{{ route('invoiceProduct',$invoice->invoice_products_id) }}" style="width:250px;" class="btn btn-success">Show all product in this invoice</a></td>
           <form action="{{ route('deleteInvoice',$invoice->invoice_products_id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('DELETE')
@@ -28,9 +31,10 @@
         </tr>
         @endforeach
       </tbody>
-      </table>
+    </table>
     @endif
-    <a class="btn btn-primary btn-lg active" href="{{ route('InvoiceForm') }}">Create Invoice</a>
-    
-</div>
+    <div class="createInvoice">
+      <a class="btn btn-primary btn-lg active" href="{{ route('InvoiceForm') }}">Create Invoice</a> 
+    </div>
+  </div>
 @endsection

@@ -1,9 +1,10 @@
 @extends("userPage")
 @section('ProductToInvoiceForm')
-<form action="{{ route('addProductToInvoice',[$invoice->invoice_products_id,$product->product_id]) }}" class="create-form" method="POST" enctype="multipart/form-data" style="text-align: center">
+<form  action="{{ route('addProductToInvoice',[$invoice->invoice_products_id,$product->product_id]) }}" class="create-form" method="POST" enctype="multipart/form-data" style="text-align: center">
     @csrf
     @method('POST')
-    @if ($errors->any())
+    <div class="content" style="height: 600px">
+        @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -30,5 +31,6 @@
         </label>
     </div>
     <button type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px">Add Product To invoice</button>
+    </div>
 </form>
 @endsection
