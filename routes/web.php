@@ -45,7 +45,6 @@ Route::group(['middleware'=>(['userOnly','auth'])],function(){
     Route::get('user/Invoice/{id}',[UserController::class,"invoiceProductList"])->name('invoiceProduct');
     Route::get('user/Invoice/{id}/addProduct',[UserController::class,"addProductToInvoice"])->name("productToInvoice");
     Route::delete('user/Invoice/delete/{id}',[InvoiceController::class,"destroy"])->name("deleteInvoice");
-
 });
 
 require __DIR__.'/auth.php';

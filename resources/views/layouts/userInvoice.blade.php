@@ -20,6 +20,11 @@
           <td><div class="data">{{ $invoice->address }}</div></td>
           <td><div class="data">{{ $invoice->zipcode }}</div></td>
           <td style="width:250px"><a  href="{{ route('invoiceProduct',$invoice->invoice_products_id) }}" style="width:125px;" class="btn btn-success">Show all product in this invoice</a></td>
+          <form action="{{ route('deleteInvoice',$invoice->invoice_products_id) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <td style="width:250px"><button style="width:125px;" class="btn btn-danger">Delete Invoice</button></td>
+          </form>
         </tr>
         @endforeach
       </tbody>

@@ -56,11 +56,16 @@ class InvoiceController extends Controller
         ]);
         if($validate){
             Invoice::create([
-                'product_id' => $product->product_id,
+                'productname' => $product->name,
                 'invoiceproduct_id' => $invoice->invoice_products_id,
                 'quantity' => $request->quantity,
+                'category' => $product->category,
+                'price' => $product->price
             ]);
-            return redirect()->route('userHome');
+            Product::find($productid)->update(
+                ['qty' => $product->qty - $request->quantity,]
+            );
+            return redirect()->route('invoiceProduct',$invoiceid);
         }
     }
     public function store(StoreInvoiceRequest $request)
@@ -88,8 +93,8 @@ class InvoiceController extends Controller
    
     public function destroy($id)
     {
+        InvoiceProduct::destroy($id);
         
-        Invoice::destroy($id);
         return redirect()->route('userInvoice');
     }
 }

@@ -2,7 +2,8 @@
 @section("invoiceProductList")
 @php $totalPrice = 0 @endphp
 <div class="content">
-    <div class="header-content">
+    <div class="header-content" style="text-align: center">
+        <h6>PT WEASELSTORE</h6>
         <h6>Invoice Number : {{ $invoices->invoiceNumber }}</h6>
         <h6>Address : {{ $invoices->address }}</h6>
         <h6>Zipcode : {{ $invoices->zipcode }}</h6>
@@ -19,12 +20,19 @@
                 </tr>
               </thead>
         <tbody>
+    
             @if ($subinvoice->isEmpty())
-                <h1>kosong</h1>
+            <tr class="isi-data">
+                <th colspan="5" style="text-align: left" >
+                    <div style="max-width: 25%; text-align:center">
+                        <a href="{{ route('productToInvoice',$invoices->invoice_products_id) }}" class="btn btn-success">Add Product</a>
+                    </div>
+                </th>
+            </tr>
             @else
                 @foreach ($subinvoice as $product)
                     <tr class="isi-data">
-                        <th scope="row"><div class="data">{{ $product->name }}</div></th>
+                        <th scope="row"><div class="data">{{ $product->productname }}</div></th>
                         <td><div class="data">{{ $product->category }}</div></td>
                         <td><div class="data">{{ $product->quantity }}</div></td>
                         <td><div class="data">Rp{{ $product->price }}</div></td>

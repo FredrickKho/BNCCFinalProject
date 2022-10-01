@@ -14,17 +14,16 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id('invoice_id');
             $table->timestamps();
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('invoiceproduct_id');
-            $table->foreign('product_id')->references('product_id')->on('products')->onUpdate('cascade');
+            $table->string('productname');
+            $table->string('category');
+            $table->integer('price');
             $table->foreign('invoiceproduct_id')->references('invoice_products_id')->on('invoice_products');
             $table->integer('quantity');
             
         });
     }
-
     /**
      * Reverse the migrations.
      *

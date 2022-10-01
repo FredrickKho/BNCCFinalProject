@@ -34,9 +34,11 @@ class UserController extends Controller
     function invoiceProductList($id){
         $invoices = InvoiceProduct::findOrFail($id);
         $subinvoice = DB::table('invoices')
-        ->join('products','products.product_id','=','invoices.product_id')
         ->where('invoiceproduct_id','=',$id)
         ->get();
+        // ->join('invoices','invoices.invoiceproduct_id','=','invoices.invoice_products_id')
+        // ->where('invoiceproduct_id','=',$id)
+        // ->get();
         return view('layouts.userInvoiceProductList',compact('invoices','subinvoice'));
     }
     
